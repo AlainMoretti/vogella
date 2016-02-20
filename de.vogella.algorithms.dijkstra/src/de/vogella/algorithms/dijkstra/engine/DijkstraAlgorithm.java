@@ -125,5 +125,26 @@ public class DijkstraAlgorithm {
 		Collections.reverse(path);
 		return path;
 	}
+	/*
+        * This method returns the cumulative path weight from the source 
+        * to the selected target and
+        * 0 if no path exists
+        */
+        public int getPathWeight(Vertex target) {
+	  	LinkedList<Vertex> path = getPath(target);
+	  	int distance = 0;
+	        Vertex previous = null;
+	    	    
+	        for (Vertex vertex : path) {
+	    		for (Edge e:edges) {
+	    			if (e.getSource() == previous && e.getDestination() == vertex ){
+	    				distance += e.getWeight();
+	    				continue;
+	    			}
+	    		}
+			previous = vertex;
+	    	}
+	    	return distance;
+  	}
 
 }
